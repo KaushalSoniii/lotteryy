@@ -133,10 +133,10 @@ const itemsPerPage = 5;
 
 const RecentTransactions = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedType, setSelectedType] = useState("Distributor");
+  const [selectedType, setSelectedType] = useState("All");
 
   const filteredData =
-    selectedType === "Distributor"
+    selectedType === "All"
       ? sampleData
       : sampleData.filter((item) => item.type === selectedType);
 
@@ -173,6 +173,7 @@ const RecentTransactions = () => {
                   value={selectedType}
                   onChange={handleDropdownChange}
                 >
+                  <option value="All">ALL</option>
                   <option value="Distributor">Distributor</option>
                   <option value="Vendor">Vendor</option>
                 </select>
