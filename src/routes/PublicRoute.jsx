@@ -5,6 +5,7 @@ import Layout from "../components/layouts/Layout.jsx";
 import Login from "../pages/auth/Login.jsx";
 import Dashboard from "../pages/modules/dashboard/Dashboard.jsx";
 import AddBalance from "../pages/modules/addbalance/Addbalance.jsx";
+import Distributor from "../pages/modules/distributor/Distributor.jsx";
 
 const PublicRoute = () => {
   const [activeTab, setActiveTab] = useState("/");
@@ -37,6 +38,11 @@ const PublicRoute = () => {
           path="/addbalance"
           element={<AddBalance/>}
         />
+        <Route
+          path="/distributor"
+          element={<Distributor/>}
+        />
+
     </Routes>
   )
 };
