@@ -366,7 +366,7 @@ const Index = () => {
                     0%
                   </span>
                   <select
-                    value={`${currentCommission}%`}
+                    value={currentCommission}
                     onChange={(e) => {
                       const value = parseInt(e.target.value);
                       if (selectedTab === "distributor") {
