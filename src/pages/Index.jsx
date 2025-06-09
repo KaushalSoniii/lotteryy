@@ -218,14 +218,14 @@ const CommissionForm = React.memo(() => {
             </TabsContent>
 
             <TabsContent value="vendor" className="space-y-6">
-              <div className="p-4 border-2 border-blue-200 border-dashed rounded-lg bg-blue-50/30">
+              <div className="p-6 border-2 border-blue-400 border-dashed rounded-lg bg-blue-50/20">
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="vendor-name">Vendor Name</Label>
                     <Input
                       id="vendor-name"
                       placeholder="Enter Vendor Name"
-                      className="w-full bg-white"
+                      className="w-full bg-white border-gray-300"
                       value={vendorName}
                       onChange={handleVendorNameChange}
                     />
@@ -236,7 +236,7 @@ const CommissionForm = React.memo(() => {
                     <Input
                       id="vendor-id"
                       placeholder="Enter Vendor Id"
-                      className="w-full bg-white"
+                      className="w-full bg-white border-gray-300"
                       value={vendorId}
                       onChange={handleVendorIdChange}
                     />
@@ -249,7 +249,7 @@ const CommissionForm = React.memo(() => {
                     <span className="text-sm font-medium">0%</span>
                     <div className="flex items-center gap-2">
                       <Select value={currentCommissionValue}>
-                        <SelectTrigger className="w-16 h-8 bg-white">
+                        <SelectTrigger className="w-16 h-8 bg-white border-gray-300">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>{percentageSelectItems}</SelectContent>
