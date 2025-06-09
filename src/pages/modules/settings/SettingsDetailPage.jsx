@@ -27,7 +27,7 @@ const SettingDetailPage = () => {
   const setting = settingsData[section];
 
   return (
-    <div className="flex pl-[12%] w-[113%] mt-6 h-screen">
+    <div className="flex pl-[20%] w-full pt-14 h-screen">
             <Sidebar/>
             <div className="flex-1 flex flex-col">
                <Header/>
