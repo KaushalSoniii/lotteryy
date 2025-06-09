@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import {
   SidebarProvider,
   Sidebar,
@@ -37,10 +37,94 @@ import {
   Bell,
 } from "lucide-react";
 
-const CommissionForm = () => {
-  const [selectedTab, setSelectedTab] = React.useState("distributor");
-  const [commissionValue, setCommissionValue] = React.useState([7]);
-  const [vendorCommissionValue, setVendorCommissionValue] = React.useState([3]);
+// Memoized percentage options to avoid recreating array on each render
+const PERCENTAGE_OPTIONS = Array.from({ length: 101 }, (_, i) => ({
+  value: `${i}%`,
+  label: `${i}%`,
+}));
+
+// Memoized navigation items
+const NAVIGATION_ITEMS = [
+  { icon: LayoutDashboard, label: "Dashboard", isActive: false },
+  { icon: User, label: "Distributor", isActive: false },
+  { icon: Users, label: "Vendors", isActive: false },
+  { icon: Award, label: "Quiz Result", isActive: false },
+  { icon: Percent, label: "Commission", isActive: true },
+  { icon: Settings, label: "Settings", isActive: false },
+];
+
+// Memoized Commission Form Component
+const CommissionForm = React.memo(() => {
+  const [selectedTab, setSelectedTab] = useState("distributor");
+  const [commissionValue, setCommissionValue] = useState([7]);
+  const [vendorCommissionValue, setVendorCommissionValue] = useState([3]);
+  const [distributorName, setDistributorName] = useState("");
+  const [distributorId, setDistributorId] = useState("");
+  const [vendorName, setVendorName] = useState("");
+  const [vendorId, setVendorId] = useState("");
+
+  // Memoized handlers to prevent unnecessary re-renders
+  const handleTabChange = useCallback((value) => {
+    setSelectedTab(value);
+  }, []);
+
+  const handleCommissionChange = useCallback((value) => {
+    setCommissionValue(value);
+  }, []);
+
+  const handleVendorCommissionChange = useCallback((value) => {
+    setVendorCommissionValue(value);
+  }, []);
+
+  const handleDistributorNameChange = useCallback((e) => {
+    setDistributorName(e.target.value);
+  }, []);
+
+  const handleDistributorIdChange = useCallback((e) => {
+    setDistributorId(e.target.value);
+  }, []);
+
+  const handleVendorNameChange = useCallback((e) => {
+    setVendorName(e.target.value);
+  }, []);
+
+  const handleVendorIdChange = useCallback((e) => {
+    setVendorId(e.target.value);
+  }, []);
+
+  const handleSetCommission = useCallback(() => {
+    console.log("Setting commission for:", selectedTab, {
+      name: selectedTab === "distributor" ? distributorName : vendorName,
+      id: selectedTab === "distributor" ? distributorId : vendorId,
+      commission:
+        selectedTab === "distributor"
+          ? commissionValue[0]
+          : vendorCommissionValue[0],
+    });
+  }, [
+    selectedTab,
+    distributorName,
+    distributorId,
+    vendorName,
+    vendorId,
+    commissionValue,
+    vendorCommissionValue,
+  ]);
+
+  // Memoized percentage options JSX to prevent recreation
+  const percentageSelectItems = useMemo(
+    () =>
+      PERCENTAGE_OPTIONS.map(({ value, label }) => (
+        <SelectItem key={value} value={value}>
+          {label}
+        </SelectItem>
+      )),
+    [],
+  );
+
+  const currentCommission =
+    selectedTab === "distributor" ? commissionValue : vendorCommissionValue;
+  const currentCommissionValue = `${currentCommission[0]}%`;
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -64,7 +148,7 @@ const CommissionForm = () => {
         <CardContent>
           <Tabs
             value={selectedTab}
-            onValueChange={setSelectedTab}
+            onValueChange={handleTabChange}
             className="w-full"
           >
             <TabsList className="grid w-full grid-cols-2 mb-6">
@@ -80,6 +164,8 @@ const CommissionForm = () => {
                     id="distributor-name"
                     placeholder="Enter Vendor Name"
                     className="w-full"
+                    value={distributorName}
+                    onChange={handleDistributorNameChange}
                   />
                 </div>
 
@@ -89,6 +175,8 @@ const CommissionForm = () => {
                     id="distributor-id"
                     placeholder="Enter Vendor Id"
                     className="w-full"
+                    value={distributorId}
+                    onChange={handleDistributorIdChange}
                   />
                 </div>
               </div>
@@ -98,17 +186,11 @@ const CommissionForm = () => {
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">0%</span>
                   <div className="flex items-center gap-2">
-                    <Select value={`${commissionValue[0]}%`}>
+                    <Select value={currentCommissionValue}>
                       <SelectTrigger className="w-16 h-8">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
-                        {Array.from({ length: 101 }, (_, i) => (
-                          <SelectItem key={i} value={`${i}%`}>
-                            {i}%
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
+                      <SelectContent>{percentageSelectItems}</SelectContent>
                     </Select>
                   </div>
                   <span className="text-sm font-medium">100%</span>
@@ -117,7 +199,7 @@ const CommissionForm = () => {
                 <div className="px-2">
                   <Slider
                     value={commissionValue}
-                    onValueChange={setCommissionValue}
+                    onValueChange={handleCommissionChange}
                     max={100}
                     step={1}
                     className="w-full"
@@ -126,7 +208,10 @@ const CommissionForm = () => {
               </div>
 
               <div className="pt-4">
-                <Button className="w-full bg-orange-400 hover:bg-orange-500 text-white">
+                <Button
+                  className="w-full bg-orange-400 hover:bg-orange-500 text-white"
+                  onClick={handleSetCommission}
+                >
                   Set Commission
                 </Button>
               </div>
@@ -141,6 +226,8 @@ const CommissionForm = () => {
                       id="vendor-name"
                       placeholder="Enter Vendor Name"
                       className="w-full bg-white"
+                      value={vendorName}
+                      onChange={handleVendorNameChange}
                     />
                   </div>
 
@@ -150,6 +237,8 @@ const CommissionForm = () => {
                       id="vendor-id"
                       placeholder="Enter Vendor Id"
                       className="w-full bg-white"
+                      value={vendorId}
+                      onChange={handleVendorIdChange}
                     />
                   </div>
                 </div>
@@ -159,17 +248,11 @@ const CommissionForm = () => {
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">0%</span>
                     <div className="flex items-center gap-2">
-                      <Select value={`${vendorCommissionValue[0]}%`}>
+                      <Select value={currentCommissionValue}>
                         <SelectTrigger className="w-16 h-8 bg-white">
                           <SelectValue />
                         </SelectTrigger>
-                        <SelectContent>
-                          {Array.from({ length: 101 }, (_, i) => (
-                            <SelectItem key={i} value={`${i}%`}>
-                              {i}%
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
+                        <SelectContent>{percentageSelectItems}</SelectContent>
                       </Select>
                     </div>
                     <span className="text-sm font-medium">100%</span>
@@ -178,7 +261,7 @@ const CommissionForm = () => {
                   <div className="px-2">
                     <Slider
                       value={vendorCommissionValue}
-                      onValueChange={setVendorCommissionValue}
+                      onValueChange={handleVendorCommissionChange}
                       max={100}
                       step={1}
                       className="w-full"
@@ -187,7 +270,10 @@ const CommissionForm = () => {
                 </div>
 
                 <div className="pt-4">
-                  <Button className="w-full bg-orange-400 hover:bg-orange-500 text-white">
+                  <Button
+                    className="w-full bg-orange-400 hover:bg-orange-500 text-white"
+                    onClick={handleSetCommission}
+                  >
                     Set Commission
                   </Button>
                 </div>
@@ -198,9 +284,37 @@ const CommissionForm = () => {
       </Card>
     </div>
   );
-};
+});
 
-const AppSidebar = () => {
+CommissionForm.displayName = "CommissionForm";
+
+// Memoized Navigation Item Component
+const NavigationItem = React.memo(({ icon: Icon, label, isActive }) => (
+  <SidebarMenuItem>
+    <SidebarMenuButton isActive={isActive}>
+      <Icon className="h-4 w-4" />
+      <span>{label}</span>
+    </SidebarMenuButton>
+  </SidebarMenuItem>
+));
+
+NavigationItem.displayName = "NavigationItem";
+
+// Memoized Sidebar Component
+const AppSidebar = React.memo(() => {
+  const navigationItems = useMemo(
+    () =>
+      NAVIGATION_ITEMS.map((item) => (
+        <NavigationItem
+          key={item.label}
+          icon={item.icon}
+          label={item.label}
+          isActive={item.isActive}
+        />
+      )),
+    [],
+  );
+
   return (
     <Sidebar className="border-r">
       <SidebarHeader className="p-4">
@@ -213,49 +327,7 @@ const AppSidebar = () => {
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton>
-              <LayoutDashboard className="h-4 w-4" />
-              <span>Dashboard</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <SidebarMenuButton>
-              <User className="h-4 w-4" />
-              <span>Distributor</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <SidebarMenuButton>
-              <Users className="h-4 w-4" />
-              <span>Vendors</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <SidebarMenuButton>
-              <Award className="h-4 w-4" />
-              <span>Quiz Result</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <SidebarMenuButton isActive>
-              <Percent className="h-4 w-4" />
-              <span>Commission</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <SidebarMenuButton>
-              <Settings className="h-4 w-4" />
-              <span>Settings</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <SidebarMenu>{navigationItems}</SidebarMenu>
       </SidebarContent>
 
       <SidebarSeparator />
@@ -279,25 +351,34 @@ const AppSidebar = () => {
       </SidebarFooter>
     </Sidebar>
   );
-};
+});
 
+AppSidebar.displayName = "AppSidebar";
+
+// Memoized Header Component
+const AppHeader = React.memo(() => (
+  <header className="flex h-16 shrink-0 items-center justify-end gap-2 border-b bg-white px-4">
+    <Button variant="ghost" size="sm" className="relative">
+      <Bell className="h-4 w-4" />
+      <span className="absolute -top-1 -right-1 h-2 w-2 bg-red-500 rounded-full"></span>
+    </Button>
+    <Avatar className="h-8 w-8">
+      <AvatarImage src="/placeholder.svg" alt="User" />
+      <AvatarFallback>U</AvatarFallback>
+    </Avatar>
+  </header>
+));
+
+AppHeader.displayName = "AppHeader";
+
+// Main Index Component
 const Index = () => {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full bg-gray-50">
         <AppSidebar />
         <SidebarInset className="flex-1">
-          {/* Header */}
-          <header className="flex h-16 shrink-0 items-center justify-end gap-2 border-b bg-white px-4">
-            <Button variant="ghost" size="sm" className="relative">
-              <Bell className="h-4 w-4" />
-              <span className="absolute -top-1 -right-1 h-2 w-2 bg-red-500 rounded-full"></span>
-            </Button>
-            <Avatar className="h-8 w-8">
-              <AvatarImage src="/placeholder.svg" alt="User" />
-              <AvatarFallback>U</AvatarFallback>
-            </Avatar>
-          </header>
+          <AppHeader />
 
           {/* Main Content */}
           <main className="flex-1 p-6">
