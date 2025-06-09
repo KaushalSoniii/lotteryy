@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RecentTransactions from "./RecentTranscations";
+import Header from "../../../components/layouts/Header";
+import Sidebar from "../../../components/layouts/Sidebar";
 import {
   ComposedChart,
   Bar,
@@ -71,8 +73,24 @@ const Dashboard = () => {
   const data = getData();
 
   return (
-    <div className="max-w-[1112px] w-full mx-auto min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8 space-y-6">
+    <div className="flex pl-[12%] w-[113%] mt-6 h-[30vh]">
+    <Sidebar/>
+    <div className="flex-1 flex flex-col">
+       <Header/>
+       <div className="flex-1 bg-gray-100 p-4 sm:p-6 lg:p-8 space-y-6">
+        <style>
+        {`
+          .no-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}
+      </style>
       {/* Header */}
+
       <div className="bg-white p-4 rounded shadow flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-xl font-bold">Dashboard</h1>
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
@@ -94,9 +112,15 @@ const Dashboard = () => {
         </div>
       </div>
 
+   <div
+        className="space-y-8 overflow-y-auto no-scrollbar"
+        style={{ maxHeight: "480px" }}
+      >
       {/* Today Overview */}
       <div className="bg-white p-4 rounded shadow">
-        <h2 className="text-lg font-semibold mb-4">Today's Overview</h2>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+          <h2 className="text-lg font-semibold">Today's Overview</h2>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-4">
           <OverviewCard title="Total Users" value="850" />
           <OverviewCard title="Total Entries" value="220" />
@@ -175,8 +199,17 @@ const Dashboard = () => {
       </div>
       {/* recent transcation */}
       <RecentTransactions />
+      </div>
     </div>
+    </div>
+    </div>
+   
   );
 };
 
 export default Dashboard;
+
+
+
+
+

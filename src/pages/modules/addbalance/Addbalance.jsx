@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { ArrowLeft, CheckCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Header from "../../../components/layouts/Header";
+import Sidebar from "../../../components/layouts/Sidebar";
 
 const AddBalance = () => {
   const [activeTab, setActiveTab] = useState("Distributor");
@@ -33,9 +35,13 @@ const AddBalance = () => {
   };
 
   return (
-    <div className="p-4 max-w-4xl mx-auto min-h-screen">
+    <div className="flex pl-[12%] w-[113%] mt-6 h-[30vh]">
+        <Sidebar/>
+        <div className="flex-1 flex flex-col">
+           <Header/>
+   <div className="flex-1 bg-gray-100 p-4 sm:p-6 lg:p-8 space-y-6">
       {/* Header */}
-      <div className="flex items-center space-x-2 mb-6 bg-white shadow-md rounded-lg p-4 w-full">
+      <div className="flex items-center space-x-2 mb-4 bg-white shadow-md rounded-lg p-3 w-full">
         <ArrowLeft
           className="w-6 h-6 cursor-pointer"
           onClick={() => navigate(-1)}
@@ -46,13 +52,13 @@ const AddBalance = () => {
       </div>
 
       {/* Card */}
-      <div className="bg-white shadow-md rounded-lg p-6 w-full">
-        <h2 className="text-md font-semibold mb-4">
-          Add Balance Distributors/Vendors
-        </h2>
+      <div className="bg-white shadow-md rounded-lg p-4 w-full">
+       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+          <h2 className="text-lg font-semibold">Add Balance Distributor/Vendor</h2>
+        </div>
 
         {/* Tabs */}
-        <div className="flex mb-4 space-x-4">
+        <div className="flex mb-2 space-x-4"> 
           {["Distributor", "Vendor"].map((tab) => (
             <button
               key={tab}
@@ -78,12 +84,12 @@ const AddBalance = () => {
             <Form className="space-y-4">
               {/* Name */}
               <div>
-                <label className="block mb-1">{activeTab} Name</label>
+                <label className="mb-1 flex flex-col sm:flex-row items-start sm:items-center gap-2">{activeTab} Name</label>
                 <Field
                   type="text"
                   name="name"
                   placeholder={`Enter ${activeTab} name`}
-                  className="w-full px-3 py-2 border rounded"
+                  className="w-full px-3 py-2 border rounded "
                 />
                 <ErrorMessage
                   name="name"
@@ -94,7 +100,7 @@ const AddBalance = () => {
 
               {/* ID */}
               <div>
-                <label className="block mb-1">{activeTab} ID</label>
+                <label className="mb-1 flex flex-col sm:flex-row items-start sm:items-center gap-2">{activeTab} ID</label>
                 <Field
                   type="text"
                   name="id"
@@ -111,7 +117,7 @@ const AddBalance = () => {
               {/* Amount and Add button */}
               <div className="flex flex-col md:flex-row md:items-end md:space-x-4">
                 <div className="flex-1">
-                  <label className="block mb-1">Add Balance</label>
+                  <label className="mb-1 flex flex-col sm:flex-row items-start sm:items-center gap-2">Add Balance</label>
                   <Field
                     type="number"
                     name="amount"
@@ -164,10 +170,10 @@ const AddBalance = () => {
               </div>
 
               {/* Done Button */}
-              <div className="text-center mt-6">
+              <div className="text-center mt-4">
                 <button
                   type="submit"
-                  className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-8 py-2 rounded"
+                  className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-1 rounded"
                 >
                   Done
                 </button>
@@ -196,6 +202,8 @@ const AddBalance = () => {
           </div>
         </div>
       )}
+    </div>
+    </div>
     </div>
   );
 };

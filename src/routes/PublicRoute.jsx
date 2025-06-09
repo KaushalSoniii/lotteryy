@@ -6,8 +6,8 @@ import Login from "../pages/auth/Login.jsx";
 import Dashboard from "../pages/modules/dashboard/Dashboard.jsx";
 import AddBalance from "../pages/modules/addbalance/Addbalance.jsx";
 import Distributor from "../pages/modules/distributor/Distributor.jsx";
-import Setting from "../pages/modules/setting/Setting.jsx";
-import SettingDetailPage from "../pages/modules/setting/SettingDetailPage.jsx";
+import Settings from "../pages/modules/settings/Settings.jsx";
+import SettingsDetailPage from "../pages/modules/settings/SettingsDetailPage.jsx";
 
 const PublicRoute = () => {
   const [activeTab, setActiveTab] = useState("/");
@@ -27,8 +27,8 @@ const PublicRoute = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/addbalance" element={<AddBalance />} />
       <Route path="/distributor" element={<Distributor />} />
-      <Route path="/setting" element={<Setting />} />
-      <Route path="/setting/:section" element={<SettingDetailPage />} />
+      <Route path="/settings" element={<Settings />} />
+      <Route path="/settings/:section" element={<SettingsDetailPage />} />
     </Routes>
   );
 };

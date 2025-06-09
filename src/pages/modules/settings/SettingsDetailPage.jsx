@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Pencil } from "lucide-react";
+import Header from "../../../components/layouts/Header";
+import Sidebar from "../../../components/layouts/Sidebar";
 
 const settingsData = {
   "terms-&-conditions": {
@@ -25,7 +27,11 @@ const SettingDetailPage = () => {
   const setting = settingsData[section];
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 min-h-screen bg-gray-100 space-y-6">
+    <div className="flex pl-[12%] w-[113%] mt-6 h-screen">
+            <Sidebar/>
+            <div className="flex-1 flex flex-col">
+               <Header/>
+     <div className="flex-1 bg-gray-100 p-4 sm:p-6 lg:p-8 space-y-6">
       <div className="bg-white rounded shadow p-4 flex justify-between items-center">
         <button
           onClick={() => navigate(-1)}
@@ -38,16 +44,17 @@ const SettingDetailPage = () => {
           Edit
         </button>
       </div>
-
       <div className="bg-white p-4 rounded shadow space-y-4">
-       <div className="bg-white p-4 rounded shadow space-y-4">
-        <h2 className="text-sm sm:text-lg font-semibold text-gray-800">{setting?.title}</h2>
-         <div className="text-sm sm:text-base p-4 text-gray-700 whitespace-pre-wrap">
-          {setting?.content}
+       <div className="bg-white p-4 rounded shadow space-y-4 ">
+        <h2 className=" flex text-sm sm:text-lg font-semibold text-gray-800">{setting?.title}</h2>
+         <div className="text-sm text-start sm:text-base p-4 text-gray-700 whitespace-pre-wrap">
+           {setting?.content}  
         </div>
        </div>
       </div>
     </div>
+     </div>
+      </div>
   );
 };
 
