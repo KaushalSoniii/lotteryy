@@ -46,87 +46,82 @@ const CommissionForm = () => {
     selectedTab === "distributor" ? commissionValue : vendorCommissionValue;
 
   return (
-    <div className="p-6 space-y-6">
-      {/* Back Button Header */}
-      <div className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-sm border">
+    <div className="p-6 max-w-4xl mx-auto">
+      {/* Back Button Header - matching the original */}
+      <div className="flex items-center gap-3 mb-6 p-4 bg-white rounded-lg border border-gray-200">
         <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-4 w-4 text-gray-600" />
         </Button>
         <span className="text-gray-700 font-medium">
           Set Commission For Distributors/Vendors
         </span>
       </div>
 
-      {/* Main Card */}
-      <Card className="bg-white shadow-md">
-        <CardHeader className="pb-4">
+      {/* Main Card - exactly like the original */}
+      <Card className="bg-white border border-gray-200 rounded-lg shadow-sm">
+        <CardHeader className="p-6 border-b border-gray-100">
           <h2 className="text-lg font-semibold text-gray-900">
             Set Commission For Distributors/Vendors
           </h2>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="p-6">
           <Tabs
             value={selectedTab}
             onValueChange={setSelectedTab}
             className="w-full"
           >
-            {/* Simple Tabs */}
-            <TabsList className="grid w-fit grid-cols-2 bg-gray-100 p-1 h-auto">
-              <TabsTrigger
-                value="distributor"
-                className="px-6 py-2 text-sm data-[state=active]:bg-white data-[state=active]:shadow-sm"
-              >
-                Distributor
-              </TabsTrigger>
-              <TabsTrigger
-                value="vendor"
-                className="px-6 py-2 text-sm data-[state=active]:bg-white data-[state=active]:shadow-sm"
-              >
-                Vendor
-              </TabsTrigger>
-            </TabsList>
+            {/* Simple Tabs - matching original style */}
+            <div className="mb-6">
+              <TabsList className="inline-flex bg-gray-100 rounded-lg p-1">
+                <TabsTrigger
+                  value="distributor"
+                  className="px-4 py-2 text-sm rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-gray-900"
+                >
+                  Distributor
+                </TabsTrigger>
+                <TabsTrigger
+                  value="vendor"
+                  className="px-4 py-2 text-sm rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-gray-900"
+                >
+                  Vendor
+                </TabsTrigger>
+              </TabsList>
+            </div>
 
             {/* Distributor Tab Content */}
-            <TabsContent value="distributor" className="mt-6 space-y-6">
+            <TabsContent value="distributor" className="space-y-6 mt-0">
               <div className="space-y-4">
                 <div>
-                  <Label
-                    htmlFor="distributor-name"
-                    className="text-sm font-medium text-gray-700"
-                  >
+                  <Label className="text-sm font-medium text-gray-700 mb-2 block">
                     Distributor Name
                   </Label>
                   <Input
-                    id="distributor-name"
                     placeholder="Enter Vendor Name"
-                    className="mt-1 h-10"
+                    className="h-10 w-full border-gray-300"
                   />
                 </div>
 
                 <div>
-                  <Label
-                    htmlFor="distributor-id"
-                    className="text-sm font-medium text-gray-700"
-                  >
+                  <Label className="text-sm font-medium text-gray-700 mb-2 block">
                     Distributor Id
                   </Label>
                   <Input
-                    id="distributor-id"
                     placeholder="Enter Vendor Id"
-                    className="mt-1 h-10"
+                    className="h-10 w-full border-gray-300"
                   />
                 </div>
               </div>
 
-              {/* Commission Slider Section */}
+              {/* Commission Slider Section - exactly like original */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-gray-700">0%</span>
                   <Select value="7%">
-                    <SelectTrigger className="w-16 h-8">
+                    <SelectTrigger className="w-16 h-8 border-gray-300">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
+                      <SelectItem value="7%">7%</SelectItem>
                       {Array.from({ length: 101 }, (_, i) => (
                         <SelectItem key={i} value={`${i}%`}>
                           {i}%
@@ -139,63 +134,58 @@ const CommissionForm = () => {
                   </span>
                 </div>
 
-                <div className="px-0">
+                <div className="w-full">
                   <Slider
                     value={commissionValue}
                     onValueChange={setCommissionValue}
                     max={100}
                     step={1}
-                    className="w-full"
+                    className="w-full [&>span[role=slider]]:bg-green-500 [&>span[role=slider]]:border-green-500 [&_[role=slider]]:bg-green-500 [&_[role=slider]]:border-green-500"
                   />
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-400 hover:bg-orange-500 text-white font-medium h-10">
-                Set Commission
-              </Button>
+              <div className="pt-2">
+                <Button className="w-full bg-orange-400 hover:bg-orange-500 text-white font-medium h-10 rounded-md">
+                  Set Commission
+                </Button>
+              </div>
             </TabsContent>
 
             {/* Vendor Tab Content */}
-            <TabsContent value="vendor" className="mt-6 space-y-6">
+            <TabsContent value="vendor" className="space-y-6 mt-0">
               <div className="space-y-4">
                 <div>
-                  <Label
-                    htmlFor="vendor-name"
-                    className="text-sm font-medium text-gray-700"
-                  >
+                  <Label className="text-sm font-medium text-gray-700 mb-2 block">
                     Vendor Name
                   </Label>
                   <Input
-                    id="vendor-name"
                     placeholder="Enter Vendor Name"
-                    className="mt-1 h-10"
+                    className="h-10 w-full border-gray-300"
                   />
                 </div>
 
                 <div>
-                  <Label
-                    htmlFor="vendor-id"
-                    className="text-sm font-medium text-gray-700"
-                  >
+                  <Label className="text-sm font-medium text-gray-700 mb-2 block">
                     Vendor Id
                   </Label>
                   <Input
-                    id="vendor-id"
                     placeholder="Enter Vendor Id"
-                    className="mt-1 h-10"
+                    className="h-10 w-full border-gray-300"
                   />
                 </div>
               </div>
 
-              {/* Commission Slider Section */}
+              {/* Commission Slider Section for Vendor */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-gray-700">0%</span>
                   <Select value="3%">
-                    <SelectTrigger className="w-16 h-8">
+                    <SelectTrigger className="w-16 h-8 border-gray-300">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
+                      <SelectItem value="3%">3%</SelectItem>
                       {Array.from({ length: 101 }, (_, i) => (
                         <SelectItem key={i} value={`${i}%`}>
                           {i}%
@@ -208,20 +198,22 @@ const CommissionForm = () => {
                   </span>
                 </div>
 
-                <div className="px-0">
+                <div className="w-full">
                   <Slider
                     value={vendorCommissionValue}
                     onValueChange={setVendorCommissionValue}
                     max={100}
                     step={1}
-                    className="w-full"
+                    className="w-full [&>span[role=slider]]:bg-green-500 [&>span[role=slider]]:border-green-500 [&_[role=slider]]:bg-green-500 [&_[role=slider]]:border-green-500"
                   />
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-400 hover:bg-orange-500 text-white font-medium h-10">
-                Set Commission
-              </Button>
+              <div className="pt-2">
+                <Button className="w-full bg-orange-400 hover:bg-orange-500 text-white font-medium h-10 rounded-md">
+                  Set Commission
+                </Button>
+              </div>
             </TabsContent>
           </Tabs>
         </CardContent>
@@ -232,55 +224,55 @@ const CommissionForm = () => {
 
 const AppSidebar = () => {
   return (
-    <Sidebar className="border-r">
-      <SidebarHeader className="p-4">
+    <Sidebar className="border-r border-gray-200 bg-white">
+      <SidebarHeader className="p-4 border-b border-gray-100">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-sm">30</span>
           </div>
-          <span className="font-semibold text-lg">30 PLAY</span>
+          <span className="font-semibold text-lg text-gray-900">30 PLAY</span>
         </div>
       </SidebarHeader>
 
-      <SidebarContent>
-        <SidebarMenu>
+      <SidebarContent className="p-2">
+        <SidebarMenu className="space-y-1">
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md">
               <LayoutDashboard className="h-4 w-4" />
               <span>Dashboard</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md">
               <User className="h-4 w-4" />
               <span>Distributor</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md">
               <Users className="h-4 w-4" />
               <span>Vendors</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md">
               <Award className="h-4 w-4" />
               <span>Quiz Result</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
-            <SidebarMenuButton isActive>
+            <SidebarMenuButton className="w-full flex items-center gap-3 px-3 py-2 text-sm bg-blue-600 text-white rounded-md">
               <Percent className="h-4 w-4" />
               <span>Commission</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md">
               <Settings className="h-4 w-4" />
               <span>Settings</span>
             </SidebarMenuButton>
@@ -288,20 +280,21 @@ const AppSidebar = () => {
         </SidebarMenu>
       </SidebarContent>
 
-      <SidebarSeparator />
+      <SidebarSeparator className="mx-4 my-2" />
 
       <SidebarFooter className="p-4">
         <div className="flex items-center gap-3">
           <Avatar className="h-8 w-8">
             <AvatarImage src="/placeholder.svg" alt="Amit Kumar Jain" />
-            <AvatarFallback>AK</AvatarFallback>
+            <AvatarFallback className="bg-gray-500 text-white text-xs">
+              AK
+            </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium truncate">Amit Kumar Jain</p>
-            <Badge
-              variant="secondary"
-              className="text-xs bg-orange-100 text-orange-800"
-            >
+            <p className="text-sm font-medium text-gray-900 truncate">
+              Amit Kumar Jain
+            </p>
+            <Badge className="text-xs bg-orange-100 text-orange-700 border-orange-200 mt-1">
               Distributor
             </Badge>
           </div>
@@ -312,14 +305,16 @@ const AppSidebar = () => {
 };
 
 const AppHeader = () => (
-  <header className="flex h-16 shrink-0 items-center justify-end gap-2 border-b bg-white px-4">
-    <Button variant="ghost" size="sm" className="relative">
-      <Bell className="h-4 w-4" />
+  <header className="flex h-16 shrink-0 items-center justify-end gap-3 border-b border-gray-200 bg-white px-6">
+    <Button variant="ghost" size="sm" className="relative p-2">
+      <Bell className="h-4 w-4 text-gray-600" />
       <span className="absolute -top-1 -right-1 h-2 w-2 bg-red-500 rounded-full"></span>
     </Button>
     <Avatar className="h-8 w-8">
       <AvatarImage src="/placeholder.svg" alt="User" />
-      <AvatarFallback>U</AvatarFallback>
+      <AvatarFallback className="bg-gray-500 text-white text-xs">
+        U
+      </AvatarFallback>
     </Avatar>
   </header>
 );
