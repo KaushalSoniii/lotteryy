@@ -26,7 +26,7 @@ const SettingPage = () => {
   const navigate = useNavigate();
 
   return (
- <div className="flex pl-[12%] w-[113%] mt-6 h-[30vh]">
+ <div className="flex pl-[20%] w-full mt-14 h-[30vh]">
         <Sidebar/>
         <div className="flex-1 flex flex-col">
            <Header/>
