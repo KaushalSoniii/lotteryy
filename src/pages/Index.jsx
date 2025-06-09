@@ -127,154 +127,234 @@ const CommissionForm = React.memo(() => {
   const currentCommissionValue = `${currentCommission[0]}%`;
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      {/* Back Button */}
-      <div className="flex items-center gap-2 mb-6">
-        <Button variant="ghost" size="sm" className="p-2">
-          <ArrowLeft className="h-4 w-4" />
+    <div className="w-full max-w-5xl mx-auto space-y-6">
+      {/* Modern Header */}
+      <div className="flex items-center gap-4 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="p-3 rounded-full hover:bg-white/80 transition-all duration-200 shadow-sm"
+        >
+          <ArrowLeft className="h-5 w-5 text-blue-600" />
         </Button>
-        <h1 className="text-lg font-medium text-gray-700">
-          Set Commission For Distributors/Vendors
-        </h1>
+        <div>
+          <h1 className="text-2xl font-bold text-gray-800">
+            Commission Management
+          </h1>
+          <p className="text-gray-600 text-sm">
+            Set commission rates for distributors and vendors
+          </p>
+        </div>
       </div>
 
-      {/* Main Card */}
-      <Card className="w-full">
-        <CardHeader>
-          <h2 className="text-xl font-semibold">
-            Set Commission For Distributors/Vendors
+      {/* Enhanced Main Card */}
+      <Card className="shadow-xl border-0 bg-white rounded-2xl overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
+          <h2 className="text-xl font-semibold text-gray-800">
+            Set Commission Rates
           </h2>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-8">
           <Tabs
             value={selectedTab}
             onValueChange={handleTabChange}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger value="distributor">Distributor</TabsTrigger>
-              <TabsTrigger value="vendor">Vendor</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="distributor" className="space-y-6">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="distributor-name">Distributor Name</Label>
-                  <Input
-                    id="distributor-name"
-                    placeholder="Enter Vendor Name"
-                    className="w-full"
-                    value={distributorName}
-                    onChange={handleDistributorNameChange}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="distributor-id">Distributor Id</Label>
-                  <Input
-                    id="distributor-id"
-                    placeholder="Enter Vendor Id"
-                    className="w-full"
-                    value={distributorId}
-                    onChange={handleDistributorIdChange}
-                  />
-                </div>
-              </div>
-
-              {/* Commission Slider */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium">0%</span>
-                  <div className="flex items-center gap-2">
-                    <Select value={currentCommissionValue}>
-                      <SelectTrigger className="w-16 h-8">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>{percentageSelectItems}</SelectContent>
-                    </Select>
-                  </div>
-                  <span className="text-sm font-medium">100%</span>
-                </div>
-
-                <div className="px-2">
-                  <Slider
-                    value={commissionValue}
-                    onValueChange={handleCommissionChange}
-                    max={100}
-                    step={1}
-                    className="w-full"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-4">
-                <Button
-                  className="w-full bg-orange-400 hover:bg-orange-500 text-white"
-                  onClick={handleSetCommission}
+            {/* Redesigned Tabs */}
+            <div className="flex justify-center mb-8">
+              <TabsList className="grid w-80 grid-cols-2 p-1 bg-gray-100 rounded-xl h-12">
+                <TabsTrigger
+                  value="distributor"
+                  className="rounded-lg text-sm font-medium transition-all duration-300 data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg hover:bg-blue-50 hover:text-blue-600"
                 >
-                  Set Commission
-                </Button>
+                  <User className="h-4 w-4 mr-2" />
+                  Distributor
+                </TabsTrigger>
+                <TabsTrigger
+                  value="vendor"
+                  className="rounded-lg text-sm font-medium transition-all duration-300 data-[state=active]:bg-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg hover:bg-emerald-50 hover:text-emerald-600"
+                >
+                  <Users className="h-4 w-4 mr-2" />
+                  Vendor
+                </TabsTrigger>
+              </TabsList>
+            </div>
+
+            {/* Distributor Tab Content */}
+            <TabsContent value="distributor" className="space-y-6">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="space-y-3">
+                    <Label
+                      htmlFor="distributor-name"
+                      className="text-sm font-semibold text-gray-700"
+                    >
+                      Distributor Name
+                    </Label>
+                    <Input
+                      id="distributor-name"
+                      placeholder="Enter Distributor Name"
+                      className="h-12 bg-white border-blue-200 focus:border-blue-400 focus:ring-blue-400 rounded-lg shadow-sm transition-all duration-200"
+                      value={distributorName}
+                      onChange={handleDistributorNameChange}
+                    />
+                  </div>
+
+                  <div className="space-y-3">
+                    <Label
+                      htmlFor="distributor-id"
+                      className="text-sm font-semibold text-gray-700"
+                    >
+                      Distributor ID
+                    </Label>
+                    <Input
+                      id="distributor-id"
+                      placeholder="Enter Distributor ID"
+                      className="h-12 bg-white border-blue-200 focus:border-blue-400 focus:ring-blue-400 rounded-lg shadow-sm transition-all duration-200"
+                      value={distributorId}
+                      onChange={handleDistributorIdChange}
+                    />
+                  </div>
+                </div>
+
+                {/* Enhanced Commission Slider */}
+                <div className="space-y-6 bg-white p-6 rounded-xl shadow-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-600">
+                      0%
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm font-medium text-gray-600">
+                        Commission:
+                      </span>
+                      <Select value={currentCommissionValue}>
+                        <SelectTrigger className="w-20 h-10 bg-blue-50 border-blue-200 focus:border-blue-400 rounded-lg">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>{percentageSelectItems}</SelectContent>
+                      </Select>
+                    </div>
+                    <span className="text-sm font-medium text-gray-600">
+                      100%
+                    </span>
+                  </div>
+
+                  <div className="px-4">
+                    <Slider
+                      value={commissionValue}
+                      onValueChange={handleCommissionChange}
+                      max={100}
+                      step={1}
+                      className="w-full [&_[role=slider]]:bg-blue-500 [&_[role=slider]]:border-blue-600 [&>span]:bg-blue-500"
+                    />
+                  </div>
+
+                  <div className="text-center">
+                    <span className="text-2xl font-bold text-blue-600">
+                      {commissionValue[0]}%
+                    </span>
+                    <p className="text-sm text-gray-600">
+                      Current Commission Rate
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-6">
+                  <Button
+                    className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
+                    onClick={handleSetCommission}
+                  >
+                    Set Distributor Commission
+                  </Button>
+                </div>
               </div>
             </TabsContent>
 
+            {/* Vendor Tab Content */}
             <TabsContent value="vendor" className="space-y-6">
-              <div className="p-6 border-2 border-blue-400 border-dashed rounded-lg bg-blue-50/20">
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="vendor-name">Vendor Name</Label>
+              <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-6 rounded-xl border-2 border-dashed border-emerald-300">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="space-y-3">
+                    <Label
+                      htmlFor="vendor-name"
+                      className="text-sm font-semibold text-gray-700"
+                    >
+                      Vendor Name
+                    </Label>
                     <Input
                       id="vendor-name"
                       placeholder="Enter Vendor Name"
-                      className="w-full bg-white border-gray-300"
+                      className="h-12 bg-white border-emerald-200 focus:border-emerald-400 focus:ring-emerald-400 rounded-lg shadow-sm transition-all duration-200"
                       value={vendorName}
                       onChange={handleVendorNameChange}
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="vendor-id">Vendor Id</Label>
+                  <div className="space-y-3">
+                    <Label
+                      htmlFor="vendor-id"
+                      className="text-sm font-semibold text-gray-700"
+                    >
+                      Vendor ID
+                    </Label>
                     <Input
                       id="vendor-id"
-                      placeholder="Enter Vendor Id"
-                      className="w-full bg-white border-gray-300"
+                      placeholder="Enter Vendor ID"
+                      className="h-12 bg-white border-emerald-200 focus:border-emerald-400 focus:ring-emerald-400 rounded-lg shadow-sm transition-all duration-200"
                       value={vendorId}
                       onChange={handleVendorIdChange}
                     />
                   </div>
                 </div>
 
-                {/* Commission Slider */}
-                <div className="space-y-4 mt-6">
+                {/* Enhanced Commission Slider */}
+                <div className="space-y-6 bg-white p-6 rounded-xl shadow-sm">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">0%</span>
-                    <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-600">
+                      0%
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm font-medium text-gray-600">
+                        Commission:
+                      </span>
                       <Select value={currentCommissionValue}>
-                        <SelectTrigger className="w-16 h-8 bg-white border-gray-300">
+                        <SelectTrigger className="w-20 h-10 bg-emerald-50 border-emerald-200 focus:border-emerald-400 rounded-lg">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>{percentageSelectItems}</SelectContent>
                       </Select>
                     </div>
-                    <span className="text-sm font-medium">100%</span>
+                    <span className="text-sm font-medium text-gray-600">
+                      100%
+                    </span>
                   </div>
 
-                  <div className="px-2">
+                  <div className="px-4">
                     <Slider
                       value={vendorCommissionValue}
                       onValueChange={handleVendorCommissionChange}
                       max={100}
                       step={1}
-                      className="w-full"
+                      className="w-full [&_[role=slider]]:bg-emerald-500 [&_[role=slider]]:border-emerald-600 [&>span]:bg-emerald-500"
                     />
+                  </div>
+
+                  <div className="text-center">
+                    <span className="text-2xl font-bold text-emerald-600">
+                      {vendorCommissionValue[0]}%
+                    </span>
+                    <p className="text-sm text-gray-600">
+                      Current Commission Rate
+                    </p>
                   </div>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-6">
                   <Button
-                    className="w-full bg-orange-400 hover:bg-orange-500 text-white"
+                    className="w-full h-12 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
                     onClick={handleSetCommission}
                   >
-                    Set Commission
+                    Set Vendor Commission
                   </Button>
                 </div>
               </div>
@@ -291,7 +371,10 @@ CommissionForm.displayName = "CommissionForm";
 // Memoized Navigation Item Component
 const NavigationItem = React.memo(({ icon: Icon, label, isActive }) => (
   <SidebarMenuItem>
-    <SidebarMenuButton isActive={isActive}>
+    <SidebarMenuButton
+      isActive={isActive}
+      className="hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200"
+    >
       <Icon className="h-4 w-4" />
       <span>{label}</span>
     </SidebarMenuButton>
@@ -316,33 +399,37 @@ const AppSidebar = React.memo(() => {
   );
 
   return (
-    <Sidebar className="border-r">
-      <SidebarHeader className="p-4">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+    <Sidebar className="border-r border-gray-200 bg-white">
+      <SidebarHeader className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-sm">30</span>
           </div>
-          <span className="font-semibold text-lg">30 PLAY</span>
+          <span className="font-bold text-xl text-gray-800">30 PLAY</span>
         </div>
       </SidebarHeader>
 
-      <SidebarContent>
-        <SidebarMenu>{navigationItems}</SidebarMenu>
+      <SidebarContent className="px-4 py-6">
+        <SidebarMenu className="space-y-2">{navigationItems}</SidebarMenu>
       </SidebarContent>
 
-      <SidebarSeparator />
+      <SidebarSeparator className="mx-4" />
 
-      <SidebarFooter className="p-4">
-        <div className="flex items-center gap-3">
-          <Avatar className="h-8 w-8">
+      <SidebarFooter className="p-6">
+        <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-xl border border-orange-200">
+          <Avatar className="h-10 w-10">
             <AvatarImage src="/placeholder.svg" alt="Amit Kumar Jain" />
-            <AvatarFallback>AK</AvatarFallback>
+            <AvatarFallback className="bg-orange-500 text-white font-semibold">
+              AK
+            </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium truncate">Amit Kumar Jain</p>
+            <p className="text-sm font-semibold truncate text-gray-800">
+              Amit Kumar Jain
+            </p>
             <Badge
               variant="secondary"
-              className="text-xs bg-orange-100 text-orange-800"
+              className="text-xs bg-orange-100 text-orange-700 border-orange-200"
             >
               Distributor
             </Badge>
@@ -357,14 +444,18 @@ AppSidebar.displayName = "AppSidebar";
 
 // Memoized Header Component
 const AppHeader = React.memo(() => (
-  <header className="flex h-16 shrink-0 items-center justify-end gap-2 border-b bg-white px-4">
-    <Button variant="ghost" size="sm" className="relative">
-      <Bell className="h-4 w-4" />
-      <span className="absolute -top-1 -right-1 h-2 w-2 bg-red-500 rounded-full"></span>
+  <header className="flex h-16 shrink-0 items-center justify-end gap-4 border-b bg-white px-6 shadow-sm">
+    <Button
+      variant="ghost"
+      size="sm"
+      className="relative hover:bg-gray-100 p-3 rounded-full transition-colors duration-200"
+    >
+      <Bell className="h-5 w-5 text-gray-600" />
+      <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full border-2 border-white"></span>
     </Button>
-    <Avatar className="h-8 w-8">
+    <Avatar className="h-9 w-9">
       <AvatarImage src="/placeholder.svg" alt="User" />
-      <AvatarFallback>U</AvatarFallback>
+      <AvatarFallback className="bg-gray-500 text-white">U</AvatarFallback>
     </Avatar>
   </header>
 ));
@@ -381,7 +472,7 @@ const Index = () => {
           <AppHeader />
 
           {/* Main Content */}
-          <main className="flex-1 p-6">
+          <main className="flex-1 p-8">
             <CommissionForm />
           </main>
         </SidebarInset>
