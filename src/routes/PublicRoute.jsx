@@ -21,10 +21,11 @@ const PublicRoute = () => {
         element={
           <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
             {/* <UserManagementPanel /> */}
+           
           </Layout>
         }
       />
-      <Route path="/dashboard" element={<Dashboard />} />
+       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/addbalance" element={<AddBalance />} />
       <Route path="/distributor" element={<Distributor />} />
       <Route path="/settings" element={<Settings />} />

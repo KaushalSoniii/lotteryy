@@ -35,11 +35,11 @@ const AddBalance = () => {
   };
 
   return (
-    <div className="flex pl-[12%] w-[113%] mt-6 h-[30vh]">
+    <div className="flex pl-[20%] w-full mt-14 h-[30vh]">
         <Sidebar/>
         <div className="flex-1 flex flex-col">
            <Header/>
-   <div className="flex-1 bg-gray-100 p-4 sm:p-6 lg:p-8 space-y-6">
+   <div className="flex-1 bg-gray-100 p-3 sm:p-6 lg:p-8 space-y-3">
       {/* Header */}
       <div className="flex items-center space-x-2 mb-4 bg-white shadow-md rounded-lg p-3 w-full">
         <ArrowLeft
@@ -81,7 +81,7 @@ const AddBalance = () => {
           onSubmit={handleSubmit}
         >
           {({ handleSubmit }) => (
-            <Form className="space-y-4">
+            <Form className="space-y-3">
               {/* Name */}
               <div>
                 <label className="mb-1 flex flex-col sm:flex-row items-start sm:items-center gap-2">{activeTab} Name</label>
