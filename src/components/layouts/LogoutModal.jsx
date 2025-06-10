@@ -30,7 +30,7 @@ const LogoutModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500/10 z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500/20 z-50">
             <div ref={modalRef} className="bg-[#ffffff] p-6 rounded-xl shadow-lg w-full max-w-sm text-center relative">
                 <div className="flex justify-center mb-4">
                     <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-2xl">?</div>
