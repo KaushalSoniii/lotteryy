@@ -76,3 +76,5 @@ input[type="range"].commission-slider:focus::-ms-fill-upper {
 }
 
 
+
+@import "tailwindcss";

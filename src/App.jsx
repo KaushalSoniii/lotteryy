@@ -1,9 +1,8 @@
 import {
   BrowserRouter as Router, // Ensure BrowserRouter is imported
 } from "react-router-dom";
-import './App.css'
+import "./App.css";
 import PublicRoute from "./routes/PublicRoute";
-
 
 function App() {
   return (
@@ -13,4 +12,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
