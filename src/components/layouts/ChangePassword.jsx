@@ -4,7 +4,7 @@ function ChangePassword({ show, onClose, currentPassword, onPasswordChange }) {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const modalRef = useRef(null); // reference for Change Password
+  const modalRef = useRef(null); // reference for ChangePassword
 
   const handlePasswordUpdate = () => {
     if (oldPassword !== currentPassword) {

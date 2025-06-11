@@ -18,7 +18,7 @@ function ProfileCard({ onClose }) {
     }
   };
 
-  // 🔁 Detect outside clicks
+  // Detect outside clicks
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!showEditProfile && profileRef.current && !profileRef.current.contains(event.target)) {

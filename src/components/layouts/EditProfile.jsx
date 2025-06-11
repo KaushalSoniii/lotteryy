@@ -23,7 +23,7 @@ function EditProfile({ onClose, setShowEditProfile }) {
         onClose()
     };
 
-    // 🔁 Detect outside clicks
+    // Detect outside clicks
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (!showChangePassword && profileRef.current && !profileRef.current.contains(event.target)) {
