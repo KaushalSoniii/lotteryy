@@ -15,7 +15,7 @@ const unreadCount = notificationList.filter(notif => !notif.isRead).length;
   return (
     <>
       <header
-        className="fixed top-0 w-[80%] right-0 bg-[#ffffff] px-6 py-2 z-50"
+        className="fixed top-0 w-[80%] right-0 bg-[#ffffff] px-6 py-2 z-40"
         style={{
           boxShadow: "5px 4px 6px -1px rgba(0,0,0,0.1)",
           backgroundColor: "white",
