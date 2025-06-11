@@ -10,6 +10,7 @@ import Settings from "../pages/modules/settings/Settings.jsx";
 import SettingsDetailPage from "../pages/modules/settings/SettingsDetailPage.jsx";
 import AddEntityForm from "../components/global/AddEntityForm.jsx";
 import Vendor from "../pages/modules/vendor/Vendor.jsx";
+import Commission from "../pages/modules/commission/Commission.jsx";
 
 const PublicRoute = () => {
   const [activeTab, setActiveTab] = useState("/");
@@ -32,6 +33,7 @@ const PublicRoute = () => {
       <Route path="/add-distributor" element={<AddEntityForm />} />
       <Route path="/add-vendor" element={<AddEntityForm />} />
       <Route path="/vendors" element={<Vendor />} />
+      <Route path="/commission" element={<Commission />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/settings/:section" element={<SettingsDetailPage />} />
     </Routes>

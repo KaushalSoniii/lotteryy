@@ -416,7 +416,7 @@ const AddEntityForm = () => {
   });
 
   return (
-    <div className="flex pl-[20%] w-full mt-12">
+    <div className="flex pl-[20%] w-full mt-12 h-[90vh]">
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Header />
