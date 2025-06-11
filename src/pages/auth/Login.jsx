@@ -19,7 +19,7 @@ const Login = () => {
       // onClose();
       // Delay to allow modal to close before navigating
     setTimeout(() => {
-      navigate("/example");
+      navigate("/dashboard");
     }, 100); // 100ms delay
     } else {
       alert("Please fill all fields");

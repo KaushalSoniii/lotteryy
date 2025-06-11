@@ -8,6 +8,8 @@ import AddBalance from "../pages/modules/addbalance/Addbalance.jsx";
 import Distributor from "../pages/modules/distributor/Distributor.jsx";
 import Settings from "../pages/modules/settings/Settings.jsx";
 import SettingsDetailPage from "../pages/modules/settings/SettingsDetailPage.jsx";
+import AddEntityForm from "../components/global/AddEntityForm.jsx";
+import Vendor from "../pages/modules/vendor/Vendor.jsx";
 
 const PublicRoute = () => {
   const [activeTab, setActiveTab] = useState("/");
@@ -21,13 +23,15 @@ const PublicRoute = () => {
         element={
           <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
             {/* <UserManagementPanel /> */}
-           
           </Layout>
         }
       />
-       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/addbalance" element={<AddBalance />} />
       <Route path="/distributor" element={<Distributor />} />
+      <Route path="/add-distributor" element={<AddEntityForm />} />
+      <Route path="/add-vendor" element={<AddEntityForm />} />
+      <Route path="/vendors" element={<Vendor />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/settings/:section" element={<SettingsDetailPage />} />
     </Routes>

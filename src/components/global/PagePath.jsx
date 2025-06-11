@@ -1,5 +1,7 @@
 import React from "react";
 import { Eye, Plus, Trash2 } from "lucide-react";
+import Header from "../../components/layouts/Header";
+import Sidebar from "../../components/layouts/Sidebar";
 
 const CustomTable = ({
   title,
@@ -12,8 +14,13 @@ const CustomTable = ({
   totalPages,
   onPageChange,
 }) => {
+   
   return (
-    <div className="max-w-[1112px] w-full mx-auto min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8 space-y-6">
+    <div className="flex pl-[20%] w-full mt-14 h-[30vh]">
+            <Sidebar/>
+            <div className="flex-1 flex flex-col">
+               <Header/>
+     <div className="flex-1 bg-gray-100 p-3 sm:p-6 lg:p-8 space-y-3">
       {/* Header */}
       <div className="bg-white p-4 rounded shadow flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-xl font-bold">{title}</h1>
@@ -109,6 +116,8 @@ const CustomTable = ({
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   );
 };
